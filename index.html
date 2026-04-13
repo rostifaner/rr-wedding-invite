@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Весілля Ростислава та Руслани</title>
     
-    <!-- Favicon з кільцями -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+    <!-- Favicon з двома обручками -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍💍</text></svg>">
     
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
     
@@ -25,9 +25,10 @@
             color: var(--dark); 
             background-color: var(--bg);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container { padding: 20px; max-width: 800px; margin: auto; }
+        .container { padding: 20px; max-width: 800px; margin: auto; position: relative; z-index: 1; }
 
         header {
             padding: 80px 20px 40px;
@@ -59,7 +60,6 @@
             display: block;
         }
 
-        /* Опис над таймером */
         .countdown-description {
             display: block;
             margin-top: 40px;
@@ -69,7 +69,6 @@
             color: #888;
         }
 
-        /* Стилі таймера */
         #countdown {
             display: flex;
             justify-content: center;
@@ -160,9 +159,11 @@
             letter-spacing: 1px;
             font-size: 0.9rem;
             font-weight: 600;
+            cursor: pointer;
+            border: none;
         }
 
-        .btn:hover { background: #ab8a4a; }
+        .btn:hover { background: #ab8a4a; transform: translateY(-2px); }
 
         footer {
             padding: 60px 20px;
@@ -179,7 +180,6 @@
         <h2>Ми одружуємось!</h2>
         <h1>Ростислав & Руслана</h1>
         
-        <!-- Опис та таймер -->
         <span class="countdown-description">До нашої особливої події залишилось:</span>
         <div id="countdown">
             <div class="countdown-item">
@@ -241,8 +241,7 @@
         <div class="rsvp">
             <h2>Ви будете з нами?</h2>
             <p>Будь ласка, заповніть коротку анкету</p>
-            <!-- Додано target="_blank" для відкриття у новій вкладці -->
-            <a href="https://forms.gle/QmTTAsrV5D8heo7P6" class="btn" target="_blank" rel="noopener noreferrer">Підтвердити присутність</a>
+            <a href="https://forms.gle/QmTTAsrV5D8heo7P6" class="btn" target="_blank" rel="noopener noreferrer" onclick="fireConfetti()">Підтвердити присутність</a>
         </div>
 
         <footer>
@@ -250,8 +249,11 @@
         </footer>
     </div>
 
-    <!-- JavaScript для таймера -->
+    <!-- Підключення бібліотеки конфетті -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <script>
+        // Таймер
         function updateCountdown() {
             const weddingDate = new Date("July 3, 2026 14:00:00").getTime();
             const now = new Date().getTime();
@@ -276,6 +278,36 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Ефект конфетті при завантаженні
+        window.onload = function() {
+            const count = 200;
+            const defaults = { origin: { y: 0.7 }, colors: ['#c5a059', '#fdfbf7', '#e0c9a6'] };
+
+            function fire(particleRatio, opts) {
+                confetti({
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
+                });
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+        };
+
+        // Ефект при кліку на кнопку
+        function fireConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.8 },
+                colors: ['#c5a059', '#333']
+            });
+        }
     </script>
 
 </body>
