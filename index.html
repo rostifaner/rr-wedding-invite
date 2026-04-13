@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Весілля Ростислава та Руслани</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon з кільцями -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --gold: #c5a059;
@@ -25,7 +30,7 @@
         .container { padding: 20px; max-width: 800px; margin: auto; }
 
         header {
-            padding: 80px 20px;
+            padding: 80px 20px 40px;
             background: #fff;
             border-bottom: 1px solid #eee;
         }
@@ -54,6 +59,33 @@
             display: block;
         }
 
+        /* Стилі таймера */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .countdown-item {
+            background: white;
+            padding: 15px;
+            min-width: 70px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .countdown-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
         .intro-text {
             font-style: italic;
             font-size: 1.1rem;
@@ -77,7 +109,9 @@
 
         @media (max-width: 600px) {
             .info-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 3.5rem; }
+            h1 { font-size: 3.2rem; }
+            .countdown-item { min-width: 50px; padding: 10px; }
+            .countdown-number { font-size: 1.4rem; }
         }
 
         .card {
@@ -115,6 +149,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .btn:hover { background: #ab8a4a; }
@@ -133,6 +168,26 @@
         <span class="date-top">03 . 07 . 2026</span>
         <h2>Ми одружуємось!</h2>
         <h1>Ростислав & Руслана</h1>
+        
+        <!-- Блок таймера -->
+        <div id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Днів</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Год</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Хв</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Сек</span>
+            </div>
+        </div>
     </header>
 
     <div class="container">
@@ -182,6 +237,35 @@
             З любов’ю та нетерпінням чекаємо на зустріч! 💕
         </footer>
     </div>
+
+    <!-- JavaScript для таймера -->
+    <script>
+        function updateCountdown() {
+            // Встановлюємо дату весілля (рік, місяць (0-11), день, години, хвилини)
+            const weddingDate = new Date("July 3, 2026 14:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<h3>Цей щасливий день настав!</h3>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        // Оновлюємо таймер кожну секунду
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Викликаємо одразу при завантаженні
+    </script>
 
 </body>
 </html>
