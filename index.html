@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Весілля Ростислава та Руслани</title>
     
-    <!-- Favicon з двома обручками -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💍💍</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><g stroke=%22%23c5a059%22 stroke-width=%228%22 fill=%22none%22><circle cx=%2240%22 cy=%2250%22 r=%2225%22/><circle cx=%2260%22 cy=%2250%22 r=%2225%22/></g></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -19,13 +18,9 @@
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            text-align: center; 
-            color: var(--dark); 
-            background-color: var(--bg);
-            line-height: 1.6;
-            overflow-x: hidden;
+            margin: 0; padding: 0; text-align: center; 
+            color: var(--dark); background-color: var(--bg);
+            line-height: 1.6; overflow-x: hidden;
         }
 
         .container { padding: 20px; max-width: 800px; margin: auto; position: relative; z-index: 1; }
@@ -36,20 +31,22 @@
             border-bottom: 1px solid #eee;
         }
 
+        /* ЦЕЙ ШРИФТ ТОЧНО МАЄ ЗМІНИТИСЯ */
         h1 { 
-            font-family: 'Great Vibes', cursive; 
+            font-family: 'Lobster', cursive !important; 
             font-size: 4.5rem; 
             color: var(--gold); 
-            margin: 0;
+            margin: 20px 0;
             font-weight: 400;
+            letter-spacing: 1px;
         }
 
         h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
             font-size: 1.8rem;
             margin-bottom: 10px;
-            font-weight: 400;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .date-top {
@@ -58,6 +55,7 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
             display: block;
+            color: #888;
         }
 
         .countdown-description {
@@ -66,7 +64,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #888;
+            color: #999;
         }
 
         #countdown {
@@ -91,7 +89,6 @@
         .countdown-label {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             color: #888;
         }
 
@@ -119,8 +116,6 @@
         @media (max-width: 600px) {
             .info-grid { grid-template-columns: 1fr; }
             h1 { font-size: 3.2rem; }
-            .countdown-item { min-width: 50px; padding: 10px; }
-            .countdown-number { font-size: 1.4rem; }
         }
 
         .card {
@@ -131,13 +126,10 @@
         }
 
         .card h3 {
-            font-family: 'Playfair Display', serif;
             color: var(--gold);
             font-size: 1.5rem;
             margin-top: 0;
         }
-
-        .icon { font-size: 24px; margin-bottom: 10px; display: block; }
 
         .gift-section {
             background: #f9f4ee;
@@ -148,28 +140,27 @@
 
         .btn {
             display: inline-block;
-            padding: 15px 35px;
+            padding: 18px 40px;
             background: var(--gold);
             color: white;
             text-decoration: none;
-            border-radius: 0;
             margin-top: 20px;
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
             font-weight: 600;
-            cursor: pointer;
             border: none;
+            cursor: pointer;
         }
 
         .btn:hover { background: #ab8a4a; transform: translateY(-2px); }
 
         footer {
             padding: 60px 20px;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
             font-size: 1.2rem;
+            color: var(--gold);
+            font-family: 'Lobster', cursive;
         }
     </style>
 </head>
@@ -182,66 +173,41 @@
         
         <span class="countdown-description">До нашої особливої події залишилось:</span>
         <div id="countdown">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Днів</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Год</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Хв</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Сек</span>
-            </div>
+            <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Днів</span></div>
+            <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Год</span></div>
+            <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Хв</span></div>
+            <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Сек</span></div>
         </div>
     </header>
 
     <div class="container">
         <p class="intro-text">
-            З любов’ю в серцях і мріями про спільне майбутнє ми вирішили поєднати свої долі і з великою радістю запрошуємо Вас стати частиною цього особливого дня.
+            З любов’ю в серцях і мріями про спільне майбутнє ми вирішили поєднати свої долі...
         </p>
 
         <div class="divider">⸻</div>
 
         <div class="info-grid">
             <div class="card">
-                <span class="icon">💍</span>
-                <h3>Вінчання</h3>
-                <p><strong>03.07.2026</strong><br>
-                14:00 — у церкві</p>
+                <h3>💍 Вінчання</h3>
+                <p><strong>03.07.2026</strong><br>14:00 — Церква</p>
                 <small>📍 Назва та адреса церкви</small>
             </div>
-
             <div class="card">
-                <span class="icon">🥂</span>
-                <h3>Святкування</h3>
-                <p><strong>03.07.2026</strong><br>
-                16:00 — ресторан «Європа»</p>
-                <small>📍 Адреса ресторану</small>
+                <h3>🥂 Святкування</h3>
+                <p><strong>03.07.2026</strong><br>16:00 — ресторан «Європа»</p>
             </div>
         </div>
 
-        <div class="divider">⸻</div>
-
         <div class="gift-section">
-            <p>У цей день народжується наша сім’я,<br>
-            і для нас безцінно розділити ці миті саме з вами 💛</p>
-            
-            <p style="font-size: 0.9rem; margin-top: 20px; color: #777;">
-                Якщо бажаєте привітати нас подарунком —<br>
-                ми будемо вдячні за внесок у наш спільний початок.
-            </p>
+            <p>У цей день народжується наша сім’я 💛</p>
+            <p style="font-size: 0.9rem; color: #777;">Якщо бажаєте привітати нас подарунком — ми будемо вдячні за внесок у наш спільний початок.</p>
         </div>
 
         <div class="rsvp">
             <h2>Ви будете з нами?</h2>
-            <p>Будь ласка, заповніть коротку анкету</p>
-            <a href="https://forms.gle/QmTTAsrV5D8heo7P6" class="btn" target="_blank" rel="noopener noreferrer" onclick="fireConfetti()">Підтвердити присутність</a>
+            <p>Заповніть анкету до 15 травня</p>
+            <a href="https://forms.gle/QmTTAsrV5D8heo7P6" class="btn" target="_blank" onclick="fireConfetti()">Підтвердити присутність</a>
         </div>
 
         <footer>
@@ -249,66 +215,23 @@
         </footer>
     </div>
 
-    <!-- Підключення бібліотеки конфетті -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <script>
-        // Таймер
         function updateCountdown() {
             const weddingDate = new Date("July 3, 2026 14:00:00").getTime();
             const now = new Date().getTime();
             const distance = weddingDate - now;
-
-            if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<h3>Цей щасливий день настав!</h3>";
-                document.querySelector(".countdown-description").style.display = "none";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            if (distance < 0) { document.getElementById("countdown").innerHTML = "<h3>День настав!</h3>"; return; }
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
         }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Ефект конфетті при завантаженні
-        window.onload = function() {
-            const count = 200;
-            const defaults = { origin: { y: 0.7 }, colors: ['#c5a059', '#fdfbf7', '#e0c9a6'] };
-
-            function fire(particleRatio, opts) {
-                confetti({
-                    ...defaults,
-                    ...opts,
-                    particleCount: Math.floor(count * particleRatio)
-                });
-            }
-
-            fire(0.25, { spread: 26, startVelocity: 55 });
-            fire(0.2, { spread: 60 });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-            fire(0.1, { spread: 120, startVelocity: 45 });
-        };
-
-        // Ефект при кліку на кнопку
-        function fireConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.8 },
-                colors: ['#c5a059', '#333']
-            });
-        }
+        window.onload = () => confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#c5a059', '#fff'] });
+        function fireConfetti() { confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } }); }
     </script>
-
 </body>
 </html>
